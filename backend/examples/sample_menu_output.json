@@ -1,0 +1,312 @@
+{
+  "menu_language": "French / English",
+  "dishes": [
+    {
+      "original_name": "Huîtres à la Sauce Mignonette",
+      "canonical_guess": "Freshly Shucked Oysters",
+      "price": "5",
+      "menu_description": "Freshly Shucked Oysters, Mignonette Dressing",
+      "explicit_ingredients": [
+        "Freshly Shucked Oysters",
+        "Mignonette Dressing"
+      ],
+      "source_text": "Huîtres à la Sauce Mignonette 5\nFreshly Shucked Oysters, Mignonette Dressing",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Alto Olives, Espelette Pepper",
+      "canonical_guess": null,
+      "price": "10",
+      "menu_description": null,
+      "explicit_ingredients": [
+        "Alto Olives",
+        "Espelette Pepper"
+      ],
+      "source_text": "Alto Olives, Espelette Pepper 10",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Salade de Betteraves",
+      "canonical_guess": "Beet Salad",
+      "price": "16",
+      "menu_description": "Baked Young Beets, Goats Curd, Merlot Vinegar (V)",
+      "explicit_ingredients": [
+        "Baked Young Beets",
+        "Goats Curd",
+        "Merlot Vinegar"
+      ],
+      "source_text": "Salade de Betteraves 16\nBaked Young Beets, Goats Curd, Merlot Vinegar (V)",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Grilled Prawn",
+      "canonical_guess": "Grilled Prawn",
+      "price": "12",
+      "menu_description": "Char Grilled Prawn, Nduja Butter",
+      "explicit_ingredients": [
+        "Char Grilled Prawn",
+        "Nduja Butter"
+      ],
+      "source_text": "Grilled Prawn 12\nChar Grilled Prawn, Nduja Butter",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Tartare de Boeuf",
+      "canonical_guess": "Beef Tartare",
+      "price": "18",
+      "menu_description": "Hand-Cut Organic Grass Fed Steak Tartare, Condiments",
+      "explicit_ingredients": [
+        "Hand-Cut Organic Grass Fed Steak Tartare",
+        "Condiments"
+      ],
+      "source_text": "Tartare de Boeuf 18\nHand-Cut Organic Grass Fed Steak Tartare, Condiments",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Escargots Persillade",
+      "canonical_guess": "Escargots",
+      "price": "14/24",
+      "menu_description": "Escargot, Garlic and Parsley Crumbs",
+      "explicit_ingredients": [
+        "Escargot",
+        "Garlic and Parsley Crumbs"
+      ],
+      "source_text": "Escargots Persillade 14/24\nEscargot, Garlic and Parsley Crumbs",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Soup à l'oignon",
+      "canonical_guess": "French Onion Soup",
+      "price": "18",
+      "menu_description": "French Onion Soup, Gruyere Croutons",
+      "explicit_ingredients": [
+        "French Onion Soup",
+        "Gruyere Croutons"
+      ],
+      "source_text": "Soup à l'oignon 18\nFrench Onion Soup, Gruyere Croutons",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Assiette de Charcuterie",
+      "canonical_guess": "Charcuterie Plate",
+      "price": "24",
+      "menu_description": "Selection of Meats, Pickles and Sour Dough",
+      "explicit_ingredients": [
+        "Selection of Meats",
+        "Pickles",
+        "Sour Dough"
+      ],
+      "source_text": "Assiette de Charcuterie 24\nSelection of Meats, Pickles and Sour Dough",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Pommes Frites",
+      "canonical_guess": "French Fries",
+      "price": "7",
+      "menu_description": null,
+      "explicit_ingredients": [
+        "Pommes Frites"
+      ],
+      "source_text": "Pommes Frites 7",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Paris Mash",
+      "canonical_guess": null,
+      "price": "9",
+      "menu_description": null,
+      "explicit_ingredients": [
+        "Paris Mash"
+      ],
+      "source_text": "Paris Mash 9",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Ratatouille",
+      "canonical_guess": "Ratatouille",
+      "price": "10",
+      "menu_description": null,
+      "explicit_ingredients": [],
+      "source_text": "Ratatouille 10",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Grilled Broccolini",
+      "canonical_guess": "Grilled Broccolini",
+      "price": "12",
+      "menu_description": null,
+      "explicit_ingredients": [
+        "Grilled Broccolini"
+      ],
+      "source_text": "Grilled Broccolini 12",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Butter Lettuce, Vinaigrette",
+      "canonical_guess": null,
+      "price": "8",
+      "menu_description": null,
+      "explicit_ingredients": [
+        "Butter Lettuce",
+        "Vinaigrette"
+      ],
+      "source_text": "Butter Lettuce, Vinaigrette 8",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Steak Frites, Sauce Béarnaise",
+      "canonical_guess": "Striploin Steak with Fries and Béarnaise Sauce",
+      "price": "34",
+      "menu_description": "Striploin Steak 250 g MBS 3+, Fries, Sauce Béarnaise",
+      "explicit_ingredients": [
+        "Striploin Steak 250 g MBS 3+",
+        "Fries",
+        "Sauce Béarnaise"
+      ],
+      "source_text": "Steak Frites, Sauce Béarnaise 34\nStriploin Steak 250 g MBS 3+, Fries, Sauce Béarnaise",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Poulet Rôti",
+      "canonical_guess": "Roast Chicken",
+      "price": "26",
+      "menu_description": "Roast Bannockburn Chicken, Paris Mash, Tarragon Jus Gras",
+      "explicit_ingredients": [
+        "Roast Bannockburn Chicken",
+        "Paris Mash",
+        "Tarragon Jus Gras"
+      ],
+      "source_text": "Poulet Rôti 26\nRoast Bannockburn Chicken, Paris Mash, Tarragon Jus Gras",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Épaule d'agneau",
+      "canonical_guess": "Lamb Shoulder",
+      "price": "30",
+      "menu_description": "Lamb Shoulder, Smoked Eggplant Puree, Fregola Confit Tomatoes",
+      "explicit_ingredients": [
+        "Lamb Shoulder",
+        "Smoked Eggplant Puree",
+        "Fregola",
+        "Confit Tomatoes"
+      ],
+      "source_text": "Épaule d'agneau 30\nLamb Shoulder, Smoked Eggplant Puree, Fregola Confit Tomatoes",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Salmon en Papillote",
+      "canonical_guess": "Salmon en Papillote",
+      "price": "28",
+      "menu_description": "Fresh Tasmanian Salmon, Mussels, Spinach, Cherry Tomatoes and Caper Beurreblanc",
+      "explicit_ingredients": [
+        "Fresh Tasmanian Salmon",
+        "Mussels",
+        "Spinach",
+        "Cherry Tomatoes",
+        "Caper Beurreblanc"
+      ],
+      "source_text": "Salmon en Papillote 28\nFresh Tasmanian Salmon, Mussels, Spinach, Cherry Tomatoes and Caper Beurreblanc",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Poitrine De Porc",
+      "canonical_guess": "Braised Pork Belly",
+      "price": "29",
+      "menu_description": "24 hrs Braised Pork Belly, Kohlrabi Remoulade, Sauce Charcuterie",
+      "explicit_ingredients": [
+        "24 hrs Braised Pork Belly",
+        "Kohlrabi Remoulade",
+        "Sauce Charcuterie"
+      ],
+      "source_text": "Poitrine De Porc 29\n24 hrs Braised Pork Belly, Kohlrabi Remoulade, Sauce Charcuterie",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Mussels",
+      "canonical_guess": "Mussels",
+      "price": "24",
+      "menu_description": "Spring Bay Mussels, Café de Paris Butter and Pomme Frites",
+      "explicit_ingredients": [
+        "Spring Bay Mussels",
+        "Café de Paris Butter",
+        "Pomme Frites"
+      ],
+      "source_text": "Mussels 24\nSpring Bay Mussels, Café de Paris Butter and Pomme Frites",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Fillet au Poivre",
+      "canonical_guess": "Pepper Crusted Eye Fillet",
+      "price": "42",
+      "menu_description": "250g Eye Fillet, Pepper Sauce",
+      "explicit_ingredients": [
+        "250g Eye Fillet",
+        "Pepper Sauce"
+      ],
+      "source_text": "Fillet au Poivre 42\n250g Eye Fillet, Pepper Sauce",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Scotch Fillet",
+      "canonical_guess": "Scotch Fillet",
+      "price": "46/80",
+      "menu_description": "250/500g Scotch Fillet with Sides",
+      "explicit_ingredients": [
+        "250/500g Scotch Fillet with Sides"
+      ],
+      "source_text": "Scotch Fillet 46/80\n250/500g Scotch Fillet with Sides",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Gnocchi à la Parisienne",
+      "canonical_guess": "Parisian Gnocchi",
+      "price": "24",
+      "menu_description": "Parisian Gnocchi, Courgettes, Peas and Aged Comte",
+      "explicit_ingredients": [
+        "Parisian Gnocchi",
+        "Courgettes",
+        "Peas",
+        "Aged Comte"
+      ],
+      "source_text": "Gnocchi à la Parisienne 24\nParisian Gnocchi, Courgettes, Peas and Aged Comte",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Bombe Alaska",
+      "canonical_guess": "Bombe Alaska",
+      "price": "13",
+      "menu_description": "Coconut Sorbet, Passion Fruit Puree, Flambé",
+      "explicit_ingredients": [
+        "Coconut Sorbet",
+        "Passion Fruit Puree",
+        "Flambé"
+      ],
+      "source_text": "Bombe Alaska 13\nCoconut Sorbet, Passion Fruit Puree, Flambé",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Mousse au Chocolat",
+      "canonical_guess": "Chocolate Mousse",
+      "price": "12",
+      "menu_description": "Varlhona Chocolate Mousse, Mixed Berry Compote",
+      "explicit_ingredients": [
+        "Varlhona Chocolate Mousse",
+        "Mixed Berry Compote"
+      ],
+      "source_text": "Mousse au Chocolat 12\nVarlhona Chocolate Mousse, Mixed Berry Compote",
+      "extraction_confidence": "high"
+    },
+    {
+      "original_name": "Assiette de Fromage Cheese Selection, Condiments",
+      "canonical_guess": "Cheese Plate",
+      "price": null,
+      "menu_description": "1 Fromage - 10 | 3 Fromage - 26",
+      "explicit_ingredients": [
+        "Cheese Selection",
+        "Condiments"
+      ],
+      "source_text": "Assiette de Fromage Cheese Selection, Condiments\n1 Fromage - 10 | 3 Fromage - 26",
+      "extraction_confidence": "high"
+    }
+  ]
+}
