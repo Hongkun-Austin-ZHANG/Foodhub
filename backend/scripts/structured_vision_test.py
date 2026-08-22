@@ -13,6 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Local test menu image
 IMAGE_PATH = BASE_DIR / "samples" / "menu_test.jpg"
+TARGET_LANGUAGE = "en"
 
 
 def encode_image(image_path: Path) -> str:
@@ -54,93 +55,61 @@ def main() -> None:
     image_base64 = encode_image(IMAGE_PATH)
 
     system_prompt = """
+
 You are the menu extraction component of FoodHub.
 
-Extract restaurant-specific information from exactly one menu image
-and return it using the provided schema.
+Extract structured information from exactly one restaurant menu image
+using the provided schema.
 
-CORE PRINCIPLE:
+CORE RULE:
 The restaurant menu is the source of truth.
-Restaurant-specific evidence always takes priority over generic
-culinary knowledge.
+Do not infer unstated ingredients or culinary facts.
 
-EXTRACTION RULES:
+FIELD RULES:
 
 1. original_name
-   - Preserve the dish name as written on the menu.
-   - Do not translate or rewrite it.
+   - Preserve the dish name exactly as written.
 
-2. canonical_guess
-   - Return a short, standard, commonly recognised dish name that is
-     useful as a database matching key.
-   - Prefer the generic dish family/name rather than rewriting the full
-     restaurant description.
-   - Translation into English is allowed when unambiguous.
-   - Do not add preparation details, sauces, sides, or ingredients
-     unless they are essential to the standard dish name.
+2. translated_name / translated_description
+   - Translate into the requested target language.
+   - Do not add information not present in the menu.
+   - If menu_description is null, translated_description must be null.
+
+3. canonical_guess
+   - Return a short English standard dish name for database matching.
+   - Keep it conservative and generic.
+   - Do not add sauces, sides, ingredients, or preparation details unless essential.
    - Return null when uncertain.
-   - Never invent details.
 
-   Examples:
-   "Steak Frites, Sauce Béarnaise" -> "Steak Frites"
-   "Tartare de Boeuf" -> "Beef Tartare"
-   "Poulet Rôti" -> "Roast Chicken"
-
-3. menu_description
+4. menu_description
    - Preserve the restaurant-written description.
-   - Do not add information that is not visible on the menu.
 
-4. explicit_ingredients
-   - Include only food ingredients or dish components that are
-     explicitly written in the dish name or description.
-   - Never infer ingredients from general culinary knowledge.
-   - Do not expand a named sauce, butter, puree, condiment, or dish
-     into ingredients that are not written.
-   - Preserve restaurant wording where practical.
-   - Do not include cooking-method words such as grilled, roasted,
-     braised, baked, or flambé as ingredients.
-   - If no explicit ingredient/component information is written,
-     return an empty list.
+5. explicit_ingredients
+   - Include only ingredients or dish components explicitly written
+     in the dish name or description.
+   - Do not infer typical ingredients.
+   - Do not expand named sauces, purées, butters, or condiments.
+   - Cooking-method words such as grilled, roasted, baked, braised,
+     smoked, or flambé are not ingredients by themselves.
+   - If no explicit ingredient/component is written, return [].
 
-5. source_text
-   - Preserve the visible menu evidence supporting the extraction.
-   - Do not add reconstructed or inferred text.
+6. source_text
+   - Preserve the visible menu evidence for the dish.
 
-6. menu_language
-   - Identify all languages clearly used for dish names or
-     descriptions on the page.
-   - If both French and English are clearly present, return
-     "French / English".
+7. menu_language
+   - Identify all clearly visible languages, e.g. "French / English".
 
-7. extraction_confidence
-   - Use only high, medium, or low.
-   - Confidence refers to extraction accuracy from the image,
-     not confidence in general culinary knowledge.
+8. extraction_confidence
+   - Use only: high, medium, low.
 
-8. Extract all clearly visible orderable menu items.
+Extract all clearly visible orderable menu items.
 
-9. Do not provide recommendations, allergen judgments, dietary
-   suitability, inferred ingredients, taste, texture, or other
-   culinary interpretation.
+Do not provide recommendations, allergen judgments, dietary suitability,
+taste, texture, or inferred culinary information.
 
-IMPORTANT EXAMPLE:
-
-If the menu only says:
-
-Ratatouille 10
-
-return:
-
-explicit_ingredients = []
-
-Do NOT add tomato, eggplant, zucchini, or any other typical
-Ratatouille ingredients.
-
-If the menu says:
-
-Lamb Shoulder, Smoked Eggplant Puree, Fregola, Confit Tomatoes
-
-those components may be extracted because they are explicitly written.
+Example:
+If the menu only says "Ratatouille 10",
+explicit_ingredients must be [].
 """
 
     response = client.responses.parse(
@@ -156,8 +125,9 @@ those components may be extracted because they are explicitly written.
                     {
                         "type": "input_text",
                         "text": (
-                            "Parse this restaurant menu image into the "
-                            "FoodHub menu extraction schema."
+                             "Parse this restaurant menu image into the FoodHub menu "
+                            f"extraction schema. Use '{TARGET_LANGUAGE}' as the target "
+                             "language for user-facing translations."
                         ),
                     },
                     {
