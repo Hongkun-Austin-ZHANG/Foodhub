@@ -1,8 +1,13 @@
+import DishCard from './components/DishCard'
+import { mockMenu } from './data/mockMenu'
+
 function App() {
+  const dish = mockMenu[0]
+
   return (
-    <h1 className="text-4xl font-bold text-green-700">
-      FoodHub
-    </h1>
+    <div className="p-8">
+      <DishCard dish={dish} />
+    </div>
   )
 }
 
