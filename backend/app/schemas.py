@@ -128,9 +128,9 @@ class UnknownDishInput(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    dish_id: str = Field(
+    request_id: str = Field(
         min_length=1,
-        description="Stable identifier used to map the result back to the dish.",
+        description="Stable identifier used by C to map the result back to the menu dish.",
     )
 
     original_name: str = Field(
@@ -138,12 +138,9 @@ class UnknownDishInput(BaseModel):
         description="Dish name exactly as written on the restaurant menu.",
     )
 
-    canonical_guess: str | None = Field(
-        default=None,
-        description=(
-            "Conservative English canonical dish name produced during "
-            "menu parsing, if available."
-        ),
+    canonical_name_en: str = Field(
+        min_length=1,
+        description="Normalized English dish name provided by C.",
     )
 
     menu_description: str | None = Field(
@@ -154,8 +151,8 @@ class UnknownDishInput(BaseModel):
     explicit_ingredients: list[str] = Field(
         default_factory=list,
         description=(
-            "Ingredients or dish components explicitly written on the "
-            "restaurant menu. These are restaurant-specific evidence."
+            "Ingredients or components explicitly visible on the restaurant menu. "
+            "These are restaurant-specific evidence."
         ),
     )
 
@@ -167,26 +164,27 @@ class UnknownDishInput(BaseModel):
 
 class FallbackBatchRequest(BaseModel):
     """
-    Batch request containing all dishes that remained unmatched after
-    local database and TheMealDB lookup.
+    Batch containing all confirmed DB/TheMealDB misses for one menu.
     """
 
     model_config = ConfigDict(extra="forbid")
 
-    request_id: str = Field(
+    schema_version: Literal["1.1"] = "1.1"
+
+    batch_id: str = Field(
         min_length=1,
         description="Identifier for the whole fallback batch.",
     )
 
     dishes: list[UnknownDishInput] = Field(
         min_length=1,
-        description="All unmatched dishes to process in one LLM call.",
+        description="All confirmed unmatched dishes processed in one LLM call.",
     )
 
 
 class InferredIngredient(BaseModel):
     """
-    Ingredient inferred from general culinary knowledge.
+    Ingredient inferred from generic culinary knowledge.
 
     This is not restaurant-confirmed information.
     """
@@ -201,7 +199,12 @@ class InferredIngredient(BaseModel):
     confidence: float = Field(
         ge=0.0,
         le=1.0,
-        description="Confidence in this inferred ingredient.",
+        description="Confidence in the inferred ingredient.",
+    )
+
+    reasoning: str | None = Field(
+        default=None,
+        description="Short explanation of why the ingredient is considered likely.",
     )
 
 
@@ -209,14 +212,14 @@ class FallbackDishResult(BaseModel):
     """
     Neutral culinary knowledge returned for one unknown dish.
 
-    This output must not contain user-specific recommendation decisions.
+    B does not perform allergen, dietary, or recommendation decisions.
     """
 
     model_config = ConfigDict(extra="forbid")
 
-    dish_id: str = Field(
+    request_id: str = Field(
         min_length=1,
-        description="Echoes the dish_id from the request.",
+        description="Echoes the request_id from the corresponding input dish.",
     )
 
     canonical_name_en: str = Field(
@@ -224,9 +227,19 @@ class FallbackDishResult(BaseModel):
         description="Best neutral English canonical name for the dish.",
     )
 
+    aliases: list[str] = Field(
+        default_factory=list,
+        description="Optional alternative names for the dish.",
+    )
+
     description: str = Field(
         min_length=1,
         description="Short neutral English explanation of the dish.",
+    )
+
+    cuisine: str | None = Field(
+        default=None,
+        description="Typical cuisine or regional origin, if reasonably identifiable.",
     )
 
     inferred_ingredients: list[InferredIngredient] = Field(
@@ -237,56 +250,33 @@ class FallbackDishResult(BaseModel):
         ),
     )
 
-    taste: list[str] = Field(
-        default_factory=list,
-        description="Short neutral taste descriptors.",
-    )
-
-    texture: list[str] = Field(
-        default_factory=list,
-        description="Short neutral texture descriptors.",
-    )
-
-    cooking_method: str | None = Field(
-        default=None,
-        description="Typical cooking method, if reasonably identifiable.",
-    )
-
-    spice_level: Literal[
-        "none",
-        "mild",
-        "medium",
-        "hot",
-        "unknown",
-    ] = "unknown"
-
-    dish_family: str | None = Field(
-        default=None,
-        description="Broad dish category, such as 'snail dish' or 'roasted fish'.",
-    )
-
     overall_confidence: float = Field(
         ge=0.0,
         le=1.0,
-        description="Overall confidence in the AI fallback interpretation.",
+        description="Overall confidence in the fallback interpretation.",
     )
 
-    source: Literal["ai"] = "ai"
+    model_id: str = Field(
+        default="unknown",
+        description="Model identifier. Overwritten by the Python service.",
+    )
 
 
 class FallbackBatchResponse(BaseModel):
     """
-    Structured result for one batch of unknown dishes.
+    FoodHub B/C v1.1 fallback response.
     """
 
     model_config = ConfigDict(extra="forbid")
 
-    request_id: str = Field(
+    schema_version: Literal["1.1"] = "1.1"
+
+    batch_id: str = Field(
         min_length=1,
-        description="Echoes the request_id from the batch request.",
+        description="Echoes the batch_id from the request.",
     )
 
-    dishes: list[FallbackDishResult] = Field(
+    results: list[FallbackDishResult] = Field(
         default_factory=list,
-        description="Fallback results for all unknown dishes in the batch.",
+        description="Fallback results for all dishes in the batch.",
     )
