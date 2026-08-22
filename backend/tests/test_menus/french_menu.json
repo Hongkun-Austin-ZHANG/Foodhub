@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "source_language": "fr",
+  "target_language": "en",
+  "dishes": [
+    {
+      "original_name": "Soupe à l'oignon",
+      "canonical_name_en": "French Onion Soup",
+      "menu_description": "Traditional soup with cheese",
+      "explicit_ingredients": ["onion", "cheese", "beef stock"],
+      "price": 12.5,
+      "currency": "aud",
+      "extraction_confidence": 0.94
+    }
+  ]
+}
