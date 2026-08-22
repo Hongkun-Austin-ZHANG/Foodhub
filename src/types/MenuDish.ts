@@ -16,4 +16,6 @@ export interface MenuDish {
 
   extraction_confidence: ExtractionConfidence
   menu_language: string
+
+  image_url: string | null
 }

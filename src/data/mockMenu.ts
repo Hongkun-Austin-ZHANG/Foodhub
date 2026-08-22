@@ -12,6 +12,7 @@ export const mockMenu: MenuDish[] = [
     source_text: 'Tartare de Boeuf €24 — Câpres, échalotes, moutarde',
     extraction_confidence: 'high',
     menu_language: 'French',
+    image_url: 'https://images.immediate.co.uk/production/volatile/sites/30/2023/09/Steak-Tartare-c0d766e.jpg?quality=90&webp=true&resize=800,726',
   },
   {
     original_name: 'Soupe à l’Oignon',
@@ -25,6 +26,7 @@ export const mockMenu: MenuDish[] = [
       'Soupe à l’Oignon €14 — Oignons, bouillon, pain grillé, fromage',
     extraction_confidence: 'high',
     menu_language: 'French',
+    image_url: null,
   },
   {
     original_name: 'Ratatouille',
@@ -43,5 +45,6 @@ export const mockMenu: MenuDish[] = [
       'Ratatouille €18 — Courgette, aubergine, tomate, poivron',
     extraction_confidence: 'high',
     menu_language: 'French',
+    image_url: null,
   },
 ]

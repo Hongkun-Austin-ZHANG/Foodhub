@@ -5,7 +5,7 @@ export const mockRecommendations: Recommendation[] = [
     name: 'Beef Tartare',
     price: '€24',
     match_status: 'best_match',
-    image_url: null,
+    image_url: 'https://images.immediate.co.uk/production/volatile/sites/30/2023/09/Steak-Tartare-c0d766e.jpg?quality=90&webp=true&resize=800,726',
     taste: ['savoury', 'rich'],
     texture: ['tender'],
     ingredients: ['beef', 'capers', 'shallots', 'mustard'],
