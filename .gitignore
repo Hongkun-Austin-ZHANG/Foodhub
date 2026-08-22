@@ -1,0 +1,21 @@
+.env
+.env.local
+.venv*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+node_modules/
+.pnpm-store/
+.next/
+dist/
+.idea/
+.vscode/
+.DS_Store
+
+# Local runtime data
+.tmp/
+.pip-cache/
+.docker-data/
