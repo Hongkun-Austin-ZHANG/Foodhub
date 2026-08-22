@@ -1,0 +1,59 @@
+flowchart LR
+    User[Customer]
+
+    subgraph FE[React + TypeScript Frontend]
+        AuthUI[Register and Login]
+        ProfileUI[Profile and Preferences]
+        ScanUI[Multi-image Menu Scan]
+        ResultUI[Localized Recommendations]
+        Client[API Client and Bearer Token]
+        AuthUI --> Client
+        ProfileUI --> Client
+        ScanUI --> Client
+        Client --> ResultUI
+    end
+
+    subgraph BE[FastAPI Backend]
+        AuthAPI[Auth, Profile, and Preference APIs]
+        MenuAPI[Menu Scan and Demo APIs]
+        RecAPI[Recommendation API]
+        Parser[Menu Parsing and Translation]
+        Resolver[Dish Resolver]
+        Rules[Allergen Mapping and Rule Engine]
+        Localizer[English, Chinese, and French Display]
+        MenuAPI --> Parser
+        Parser --> Resolver
+        Resolver --> Rules
+        AuthAPI --> Rules
+        RecAPI --> Rules
+        Rules --> Localizer
+    end
+
+    subgraph DB[MySQL 8]
+        UserDB[Users, Sessions, Profiles, Preferences]
+        MenuDB[Menu Scans and Recommendation Context]
+        CacheDB[Fallback Dish Cache]
+        DemoDB[Demo Menu Templates]
+    end
+
+    subgraph EXT[External Services]
+        OpenAI[OpenAI: Menu Understanding and Batch Fallback]
+        MealDB[TheMealDB: Dish Reference Data]
+    end
+
+    User --> AuthUI
+    User --> ProfileUI
+    User --> ScanUI
+    Client -->|JSON or multipart + Bearer token| AuthAPI
+    Client -->|JSON or multipart + Bearer token| MenuAPI
+    Client -->|JSON + Bearer token| RecAPI
+    Localizer --> Client
+    AuthAPI <--> UserDB
+    MenuAPI <--> MenuDB
+    MenuAPI -->|Demo mode| DemoDB
+    Parser -->|Live scan| OpenAI
+    Resolver -->|1. Local lookup| CacheDB
+    Resolver -->|2. Online lookup| MealDB
+    Resolver -->|3. Collect misses in one batch| OpenAI
+    OpenAI -->|Persist reusable fallback facts| CacheDB
+    Rules --> MenuDB
