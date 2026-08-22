@@ -4,11 +4,14 @@ import CurrentPreferenceSelector from './components/CurrentPreferenceSelector'
 import ScanMenuPage from './pages/ScanMenuPage'
 import { mockMenu } from './data/mockMenu'
 import ProcessingPage from './pages/ProcessingPage.tsx'
+import ProfilePanel from './components/ProfilePanel'
+import ProfilePreferencePage from './pages/ProfilePreferencePage'
 
-type AppScreen = 'scan' | 'processing' | 'results'
+type AppScreen = 'scan' | 'processing' | 'results' | 'profile'
 
 function App() {
   const [screen, setScreen] = useState<AppScreen>('scan')
+  const [showProfilePanel, setShowProfilePanel] = useState(false)
 
   useEffect(() => {
     if (screen !== 'processing') return
@@ -31,17 +34,46 @@ function App() {
     return <ProcessingPage />
   }
 
+  if (screen === 'profile') {
+    return (
+      <ProfilePreferencePage
+        onBack={() => setScreen('results')}
+      />
+    )
+}
+
   return (
     <main className="min-h-screen bg-gray-50">
       <header className="border-b border-gray-200 bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-6">
-          <h1 className="text-2xl font-bold text-green-700">
-            FoodHub
-          </h1>
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
+          <div>
+            <h1 className="text-2xl font-bold text-green-700">
+              FoodHub
+            </h1>
 
-          <p className="mt-1 text-sm text-gray-500">
-            Understand what you're actually ordering.
-          </p>
+            <p className="mt-1 text-sm text-gray-500">
+              Understand what you're actually ordering.
+            </p>
+          </div>
+          
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setShowProfilePanel((current) => !current)}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-green-700 font-semibold text-white"
+            >
+              S
+            </button>
+            
+            {showProfilePanel && (
+              <ProfilePanel
+                onEditPreferences={() => {
+                  setShowProfilePanel(false)
+                  setScreen('profile')
+                }}
+              />
+            )}
+          </div>
         </div>
       </header>
 

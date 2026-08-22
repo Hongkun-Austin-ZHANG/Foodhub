@@ -13,7 +13,13 @@ import type {
   UserPreferenceProfile,
 } from '../types/UserPreferenceProfile'
 
-function PreferencePage() {
+interface ProfilePreferencePageProps {
+  onBack: () => void
+}
+
+function ProfilePreferencePage({
+    onBack,
+}:ProfilePreferencePageProps){
     const [selectedAllergies, setSelectedAllergies] = useState<string[]>([])
     const [selectedDietaryRestrictions, setSelectedDietaryRestrictions] = useState<string[]>([])
     const [selectedReligiousRestrictions, setSelectedReligiousRestrictions] = useState<string[]>([])
@@ -103,6 +109,13 @@ const handleSavePreferences = () => {
 return (
     <main className="min-h-screen bg-gray-50 px-6 py-10">
     <div className="mx-auto max-w-2xl">
+        <button
+            type="button"
+            onClick={onBack}
+            className="mb-6 text-sm font-medium text-green-700"
+        >
+            ← Back to menu
+        </button>
         <h1 className="text-3xl font-bold text-gray-900">
             Tell us what works for you
         </h1>
@@ -355,4 +368,4 @@ return (
   )
 }
 
-export default PreferencePage
+export default ProfilePreferencePage
