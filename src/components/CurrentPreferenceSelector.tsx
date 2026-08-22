@@ -7,12 +7,15 @@ import {
 } from '../data/preferenceOptions'
 import type { SpiceLevel } from '../types/UserPreferenceProfile'
 import type { CurrentPreference } from '../types/CurrentPreference'
+import RecommendationCard from './RecommendationCard'
+import { mockRecommendations } from '../data/mockRecommendations'
 
 function CurrentPreferenceSelector() {
     const [selectedProteins, setSelectedProteins] = useState<string[]>([])
     const [selectedFlavours, setSelectedFlavours] = useState<string[]>([])
     const [selectedTextures, setSelectedTextures] = useState<string[]>([])
     const [selectedSpiceLevel, setSelectedSpiceLevel] = useState<SpiceLevel>(null)
+    const [showRecommendations, setShowRecommendations] = useState(false)
 
     const toggleProtein = (value: string) => {
         setSelectedProteins((current) =>
@@ -44,6 +47,7 @@ function CurrentPreferenceSelector() {
     }
     const handleRecommend = () => {
         console.log('Current preference payload:', currentPreference)
+        setShowRecommendations(true)
     }
 
     return (
@@ -156,6 +160,29 @@ function CurrentPreferenceSelector() {
         >
             Recommend dishes
         </button>
+        {showRecommendations && (
+            <div className="mt-10">
+                <div className="mb-5">
+                <h2 className="text-2xl font-bold text-gray-900">
+                    Top Picks
+                </h2>
+
+                <p className="mt-1 text-sm text-gray-500">
+                    Based on your preferences for this meal.
+                </p>
+                </div>
+
+                <div className="space-y-4">
+                {mockRecommendations.map((recommendation) => (
+                    <RecommendationCard
+                        key={recommendation.name}
+                        recommendation={recommendation}
+                    />
+                ))}
+                </div>
+            </div>
+        )}
+
     </section>
   )
 }
