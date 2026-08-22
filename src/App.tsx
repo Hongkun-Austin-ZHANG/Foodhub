@@ -1,17 +1,26 @@
 import { useEffect, useState } from 'react'
+import Header from './components/Header'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
 import DishCard from './components/DishCard'
 import CurrentPreferenceSelector from './components/CurrentPreferenceSelector'
 import ScanMenuPage from './pages/ScanMenuPage'
 import { mockMenu } from './data/mockMenu'
 import ProcessingPage from './pages/ProcessingPage.tsx'
-import ProfilePanel from './components/ProfilePanel'
 import ProfilePreferencePage from './pages/ProfilePreferencePage'
 
-type AppScreen = 'scan' | 'processing' | 'results' | 'profile'
+type AppScreen =
+  | 'login'
+  | 'register'
+  | 'profile'
+  | 'scan'
+  | 'processing'
+  | 'results'
 
 function App() {
-  const [screen, setScreen] = useState<AppScreen>('scan')
-  const [showProfilePanel, setShowProfilePanel] = useState(false)
+  const [screen, setScreen] = useState<AppScreen>('login')
+  const [profileReturnScreen, setProfileReturnScreen] = useState<AppScreen>('scan')
+  const [isProfileOnboarding, setIsProfileOnboarding] = useState(false)
 
   useEffect(() => {
     if (screen !== 'processing') return
@@ -21,6 +30,28 @@ function App() {
     }, 2000)
     return () => window.clearTimeout(timer)
   }, [screen])
+
+  if (screen === 'login') {
+    return (
+      <LoginPage
+        onLogin={() => setScreen('scan')}
+        onCreateAccount={() => setScreen('register')}
+      />
+  )
+}
+
+if (screen === 'register') {
+  return (
+    <RegisterPage
+      onRegister={() => {
+        setIsProfileOnboarding(true)
+        setProfileReturnScreen('scan')
+        setScreen('profile')
+      }}
+      onBackToLogin={() => setScreen('login')}
+    />
+  )
+}
 
   if (screen === 'scan') {
     return (
@@ -37,45 +68,25 @@ function App() {
   if (screen === 'profile') {
     return (
       <ProfilePreferencePage
-        onBack={() => setScreen('results')}
+        isOnboarding={isProfileOnboarding}
+        onBack={() => setScreen(profileReturnScreen)}
+        onContinue={() => {
+          setIsProfileOnboarding(false)
+          setScreen(profileReturnScreen)
+        }}
       />
     )
-}
+  }
 
   return (
     <main className="min-h-screen bg-gray-50">
-      <header className="border-b border-gray-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-          <div>
-            <h1 className="text-2xl font-bold text-green-700">
-              FoodHub
-            </h1>
-
-            <p className="mt-1 text-sm text-gray-500">
-              Understand what you're actually ordering.
-            </p>
-          </div>
-          
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setShowProfilePanel((current) => !current)}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-green-700 font-semibold text-white"
-            >
-              S
-            </button>
-            
-            {showProfilePanel && (
-              <ProfilePanel
-                onEditPreferences={() => {
-                  setShowProfilePanel(false)
-                  setScreen('profile')
-                }}
-              />
-            )}
-          </div>
-        </div>
-      </header>
+      <Header
+      onEditPreferences={() => {
+        setIsProfileOnboarding(false)
+        setProfileReturnScreen('results')
+        setScreen('profile')
+        }}
+      />
 
       <div className="mx-auto grid max-w-7xl gap-8 px-6 py-8 lg:grid-cols-2">
         <section>

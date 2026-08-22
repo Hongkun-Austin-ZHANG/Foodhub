@@ -15,11 +15,15 @@ import type {
 
 interface ProfilePreferencePageProps {
   onBack: () => void
+  onContinue: () => void
+  isOnboarding?: boolean
 }
 
 function ProfilePreferencePage({
-    onBack,
-}:ProfilePreferencePageProps){
+  onBack,
+  onContinue,
+  isOnboarding = false,
+}: ProfilePreferencePageProps) {
     const [selectedAllergies, setSelectedAllergies] = useState<string[]>([])
     const [selectedDietaryRestrictions, setSelectedDietaryRestrictions] = useState<string[]>([])
     const [selectedReligiousRestrictions, setSelectedReligiousRestrictions] = useState<string[]>([])
@@ -103,19 +107,27 @@ const preferenceProfile: UserPreferenceProfile = {
   disliked_ingredients: dislikedIngredients,
 }
 const handleSavePreferences = () => {
-  console.log('Preference payload:', preferenceProfile)
+    console.log('Preference payload:', preferenceProfile)
+
+    // Later:
+    // POST preferenceProfile to backend
+
+    onContinue()
 }
 
 return (
     <main className="min-h-screen bg-gray-50 px-6 py-10">
     <div className="mx-auto max-w-2xl">
-        <button
-            type="button"
-            onClick={onBack}
-            className="mb-6 text-sm font-medium text-green-700"
-        >
-            ← Back to menu
-        </button>
+        {!isOnboarding && (
+            <button
+                type="button"
+                onClick={onBack}
+                className="mb-6 text-sm font-medium text-green-700"
+            >
+                ← Back to menu
+            </button>
+        )}
+
         <h1 className="text-3xl font-bold text-gray-900">
             Tell us what works for you
         </h1>
@@ -361,8 +373,19 @@ return (
             onClick={handleSavePreferences}
             className="mt-10 w-full rounded-xl bg-green-700 px-6 py-3 font-medium text-white hover:bg-green-800"
         >
-            Save preferences
+            {isOnboarding
+                ? 'Save preferences & continue'
+                : 'Save preferences'}
         </button>
+        {isOnboarding && (
+            <button
+                type="button"
+                onClick={onContinue}
+                className="mt-3 w-full rounded-xl px-6 py-3 text-sm font-medium text-gray-500 hover:bg-gray-100"
+            >
+                Skip for now
+            </button>
+        )}
         </div>
     </main>
   )
